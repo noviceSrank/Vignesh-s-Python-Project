@@ -1,6 +1,21 @@
 # Vignesh-s-Python-Project
 My very first Python projects :)
 
+# Rock paper scissor game: GAME#1
+"""# Rock Paper Scissors
+
+A simple two-player command-line game. Each player chooses `scissor`, `paper`,
+or `rock` to play a round. Choices are case-insensitive.
+
+## How to play
+
+Run this Python file, then enter a choice when prompted for each player.
+Matching choices result in a draw; the round winner earns one point. The first
+player to reach 3 points wins. Invalid choices are rejected.
+
+The game uses Python's built-in `input()` and requires no additional packages.
+"""
+
 
 # Parking lot system game: 
 # Parking Lot System
