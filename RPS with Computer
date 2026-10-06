@@ -1,0 +1,76 @@
+import random
+
+# Score tracking for both players
+player_points = 0
+computer_points = 0
+
+# Valid game choices
+valid_choices = ["scissor", "paper", "rock"]
+
+# Decide who wins a round
+# Returns: "player", "computer", "draw", or "invalid"
+def game(player, computer):
+    # Check if either choice is not allowed
+    if player not in valid_choices or computer not in valid_choices:
+        return "invalid"
+
+    # If both choose the same option, it's a draw
+    if player == computer:
+        return "draw"
+
+    # Check all winning combinations for the player
+    if (player == "scissor" and computer == "paper") or \
+       (player == "paper" and computer == "rock") or \
+       (player == "rock" and computer == "scissor"):
+        return "player"
+    else:
+        return "computer"
+
+
+# Main game loop
+while True:
+    # Get the player's input and normalize it
+    player = input("Choose rock, paper, or scissor (or type quit): ").lower().strip()
+
+    # Exit the game when the player types quit
+    if player == "quit":
+        print("Thanks for playing!")
+        break
+
+    # Validate the player's choice
+    if player not in valid_choices:
+        print("Invalid choice, try again.")
+        continue
+
+    # Computer selects a random move
+    computer = random.choice(valid_choices)
+    print(f"Computer chose: {computer}")
+
+    # Determine the outcome of the round
+    result = game(player, computer)
+
+    # Handle invalid input just in case
+    if result == "invalid":
+        print("Invalid choice, try again.")
+        continue
+
+    # Print the round result and update scores
+    if result == "draw":
+        print("It's a draw!")
+    elif result == "player":
+        player_points += 1
+        print("You win this round!")
+    else:
+        computer_points += 1
+        print("Computer wins this round!")
+
+    # Show the current score
+    print(f"Score → You: {player_points} | Computer: {computer_points}")
+
+    # End the game when someone reaches 3 points
+    if player_points == 3 or computer_points == 3:
+        if player_points == 3:
+            print("🎉 You win the game!")
+        else:
+            print("🎉 Computer wins the game!")
+        break
