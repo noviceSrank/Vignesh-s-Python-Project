@@ -1,0 +1,104 @@
+"""Parking lot management system Game for 2-wheeler and 4-wheeler vehicles.
+Features: Park and remove vehicles, track occupancy, calculate fees."""
+
+FLOORS = ("Basement", "Ground", "1st", "2nd", "3rd", "4th")
+
+RATES = {
+    "2w": {"Basement": 8, "Ground": 9, "1st": 10, "2nd": 12, "3rd": 15, "4th": 18},
+    "4w": {"Basement": 10, "Ground": 12, "1st": 15, "2nd": 18, "3rd": 20, "4th": 25},
+}
+
+CAPACITY = {
+    "2w": {floor: (8 if floor in ("3rd", "4th") else 0) for floor in FLOORS},
+    "4w": {floor: 8 for floor in FLOORS},
+}
+occupancy = {vehicle: {floor: 0 for floor in FLOORS} for vehicle in RATES}
+
+
+def ask_vehicle_type():
+    while True:
+        vehicle = input("Vehicle type (2w/4w): ").strip().lower()
+        if vehicle in RATES:
+            return vehicle
+        print("Enter 2w or 4w.")
+
+
+def ask_floor(vehicle):
+    available_floors = tuple(
+        floor for floor in FLOORS if CAPACITY[vehicle][floor] > 0
+    )
+    floor_choices = {
+        str(number): floor for number, floor in enumerate(available_floors, 1)
+    }
+    while True:
+        print("Available floors: " + ", ".join(
+            f"{number}. {floor}" for number, floor in floor_choices.items()
+        ))
+        choice = input("Choose a floor by number or name: ").strip()
+        floor = floor_choices.get(choice, choice.title())
+        if floor not in available_floors:
+            print("Enter a valid floor number or name.")
+        else:
+            return floor
+
+
+def park_vehicle():
+    vehicle = ask_vehicle_type()
+    floor = ask_floor(vehicle)
+    if occupancy[vehicle][floor] >= CAPACITY[vehicle][floor]:
+        print(f"Sorry, {floor} is full for {vehicle} vehicles.")
+        return
+    occupancy[vehicle][floor] += 1
+    print(f"Vehicle parked on {floor}. Spaces remaining: "
+          f"{CAPACITY[vehicle][floor] - occupancy[vehicle][floor]}.")
+
+
+def remove_vehicle():
+    vehicle = ask_vehicle_type()
+    floor = ask_floor(vehicle)
+    if occupancy[vehicle][floor] == 0:
+        print(f"No {vehicle} vehicles are parked on {floor}.")
+        return
+    while True:
+        try:
+            hours = float(input("Number of hours parked: "))
+            if hours < 0:
+                raise ValueError
+            break
+        except ValueError:
+            print("Enter a non-negative number of hours.")
+    occupancy[vehicle][floor] -= 1
+    fee = hours * RATES[vehicle][floor]
+    print(f"Vehicle removed from {floor}. Parking fee: ${fee:.2f}")
+
+
+def show_status():
+    print("\nParking status (occupied/total)")
+    for floor in FLOORS:
+        details = []
+        for vehicle in ("2w", "4w"):
+            capacity = CAPACITY[vehicle][floor]
+            if capacity:
+                details.append(f"{vehicle}: {occupancy[vehicle][floor]}/{capacity}")
+            else:
+                details.append(f"{vehicle}: unavailable")
+        print(f"{floor}: " + " | ".join(details))
+
+
+def main():
+    actions = {"1": park_vehicle, "2": remove_vehicle, "3": show_status}
+    while True:
+        print("\nParking Lot System\n1. Park Vehicle\n2. Remove Vehicle"
+              "\n3. Show Status\n4. Exit")
+        choice = input("Choose an option: ").strip()
+        if choice in actions:
+            actions[choice]()
+        elif choice == "4":
+            print("Goodbye!!! Have a nice day!")
+            break
+        else:
+            print("Choose 1, 2, 3, or 4.")
+
+
+if __name__ == "__main__":
+    main()
