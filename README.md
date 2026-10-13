@@ -66,51 +66,46 @@ The game uses Python's built-in `input()` and requires no additional packages.
 
 '' 'Occupancy is held in memory and resets when the program exits. The removal flow asks for the number of hours; the program does not record arrival times.'''
 
-RPS GAME WITH A COMPUTER:
-# Rock Paper Scissors Game
-#
-# A simple beginner-friendly Python game where you play against the computer.
-#
-# Description
-# This project lets the player choose one of three moves:
-# - Rock
-# - Paper
-# - Scissors
-#
-# The computer makes a random choice, and the winner of each round is decided by the classic rules:
-# - Rock beats Scissors
-# - Paper beats Rock
-# - Scissors beats Paper
-#
-# The game tracks the score and ends when either the player or the computer reaches 3 points.
-#
-# How to Play
-# 1. Run the Python script.
-# 2. Enter one of the following choices:
-#    - rock
-#    - paper
-#    - scissor
-#    - quit
-# 3. The computer will choose randomly.
-# 4. The round result will be shown, and the score will update.
-# 5. The game ends when either side reaches 3 points.
-#
-# Example
-# Choose rock, paper, or scissor (or type quit): rock
-# Computer chose: scissors
-# You win this round!
-# Score -> You: 1 | Computer: 0
-#
-# Features
-# - Easy to understand code
-# - Random computer moves
-# - Score tracking
-# - Game ends when someone reaches 3 points
-# - Input validation for invalid choices
-#
-# Requirements
-# - Python 3.x
-#
-# Project Goal
-# This game is designed as a basic practice project for learning Python,
-# conditionals, loops, dictionaries, and user input handling.
+# Rock Paper Scissors Game Against Computer
+
+## Description
+This is a simple beginner-friendly Rock Paper Scissors game built using Python. The player competes against the computer, which randomly selects a move for each round. The game follows the classic Rock Paper Scissors rules and keeps track of the score until either the player or the computer reaches 3 points.
+
+## How to Play
+1. Run the Python script.
+2. Enter `rock`, `paper`, or `scissor` to make your move.
+3. The computer will randomly choose its move.
+4. The game will display the result of the round and update the score.
+5. The game ends when either the player or the computer reaches 3 points.
+
+You can also type `quit` to exit the game.
+
+## Rules
+- Rock beats Scissors.
+- Paper beats Rock.
+- Scissors beats Paper.
+- Choosing the same move results in a tie.
+
+## Features
+- Random computer moves.
+- Score tracking for both the player and computer.
+- First to 3 points wins.
+- Input validation for invalid choices.
+- Simple and beginner-friendly Python code.
+
+## Example
+```text
+Choose rock, paper, or scissor (or type quit): rock
+Computer chose: scissors
+You win this round!
+Score -> You: 1 | Computer: 0
+```
+
+## Requirements
+- Python 3.x
+
+## Concepts Used
+This project demonstrates basic Python programming concepts, including variables, conditionals, loops, dictionaries, random selection, and user input handling.
+
+## Project Goal
+The goal of this project is to practice Python fundamentals by building a simple interactive game where the player competes against the computer.
